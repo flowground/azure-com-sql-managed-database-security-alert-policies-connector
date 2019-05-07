@@ -1,0 +1,129 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "managedInstanceName": {
+            "required": true,
+            "type": "string"
+        },
+        "databaseName": {
+            "required": true,
+            "type": "string"
+        },
+        "securityAlertPolicyName": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "default"
+            ]
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "allOf": [
+                        {
+                            "description": "ARM resource.",
+                            "properties": {
+                                "id": {
+                                    "description": "Resource ID.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "description": "Resource name.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "description": "Resource type.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object",
+                            "x-ms-azure-resource": true
+                        }
+                    ],
+                    "description": "ARM proxy resource.",
+                    "properties": {},
+                    "type": "object"
+                }
+            ],
+            "description": "A managed database security alert policy.",
+            "properties": {
+                "properties": {
+                    "description": "Resource properties.",
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "creationTime": {
+                            "description": "Specifies the UTC creation time of the policy.",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "disabledAlerts": {
+                            "description": "Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action",
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "emailAccountAdmins": {
+                            "description": "Specifies that the alert is sent to the account administrators.",
+                            "type": "boolean"
+                        },
+                        "emailAddresses": {
+                            "description": "Specifies an array of e-mail addresses to which the alert is sent.",
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "retentionDays": {
+                            "description": "Specifies the number of days to keep in the Threat Detection audit logs.",
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "state": {
+                            "description": "Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database.",
+                            "enum": [
+                                "New",
+                                "Enabled",
+                                "Disabled"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "SecurityAlertPolicyState"
+                            }
+                        },
+                        "storageAccountAccessKey": {
+                            "description": "Specifies the identifier key of the Threat Detection audit storage account.",
+                            "type": "string"
+                        },
+                        "storageEndpoint": {
+                            "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "state"
+                    ],
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
